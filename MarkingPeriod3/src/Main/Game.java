@@ -15,7 +15,7 @@ import scenes.Menu;
 import scenes.Playing;
 import scenes.Editing;
 
-public class Game extends JFrame implements Runnable{
+public class Game extends JFrame implements Runnable {
 	// they use game screen, but i wanna keep it consistent
 	private GamePanel gp;
 
@@ -27,7 +27,7 @@ public class Game extends JFrame implements Runnable{
 
 	private Render render;
 
-	//classes
+	// classes
 	private Menu menu;
 	private Playing playing;
 	private Settings settings;
@@ -44,7 +44,8 @@ public class Game extends JFrame implements Runnable{
 	}
 
 	private void start() {
-		gameThread = new Thread(this) {};
+		gameThread = new Thread(this) {
+		};
 		gameThread.start();
 	}
 
@@ -56,12 +57,11 @@ public class Game extends JFrame implements Runnable{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		initClasses();
-		//set starting screen to be x by y 
-		setPreferredSize(new Dimension(656, 679));
-		//can't resize
+		// set starting screen to be x by y
+		// can't resize
 		setResizable(false);
 		add(gp);
-		pack();		
+		pack();
 		setVisible(true);
 
 	}
@@ -83,7 +83,7 @@ public class Game extends JFrame implements Runnable{
 			lastTimeUPS = System.currentTimeMillis();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		double timePerFrame = 1000000000.0 / 120.0;
@@ -97,7 +97,7 @@ public class Game extends JFrame implements Runnable{
 
 		long lastTimeCheck = System.currentTimeMillis();
 
-		while(true){
+		while (true) {
 			if (System.nanoTime() - lastFrame >= timePerFrame) {
 				repaint();
 				lastFrame = System.nanoTime();
@@ -108,46 +108,50 @@ public class Game extends JFrame implements Runnable{
 				lastUpdate = System.nanoTime();
 				updates++;
 			}
-			//callUPS();
-			if(System.currentTimeMillis() - lastTimeCheck >= 1000){
+			// callUPS();
+			if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
 				System.out.println("FPS: " + frames + " | UPS: " + updates);
 				frames = 0;
 				updates = 0;
 				lastTimeCheck = System.currentTimeMillis();
 			}
-		}	
+		}
 
 	}
 
-	//getters and setters
-	public Render getRender(){
+	// getters and setters
+	public Render getRender() {
 		return render;
 
 	}
-	public Menu getMenu(){
+
+	public Menu getMenu() {
 		return menu;
 	}
-	public Playing getPlaying(){
+
+	public Playing getPlaying() {
 		return playing;
 	}
-	public Settings getSettings(){
+
+	public Settings getSettings() {
 		return settings;
 	}
-	public Editing getEditor(){
+
+	public Editing getEditor() {
 		return editing;
 	}
 
 }
 // callFPS();
-        
-//     }
 
-//     private void callFPS() {
-//         //prints fps to ensure speed is fast enough 
-//         frames++;
-//         if (System.currentTimeMillis() - lastTime >= 1000) {
-//             System.out.println("fps: " + frames);
-//             frames = 0;
-//             lastTime = System.currentTimeMillis();
-//         }
-//     }
+// }
+
+// private void callFPS() {
+// //prints fps to ensure speed is fast enough
+// frames++;
+// if (System.currentTimeMillis() - lastTime >= 1000) {
+// System.out.println("fps: " + frames);
+// frames = 0;
+// lastTime = System.currentTimeMillis();
+// }
+// }

@@ -76,13 +76,6 @@ public class WorkMouseListener implements MouseListener, MouseMotionListener {
                     break;
                 }
         }
-        //button 1 is left click and 3 is right click
-        // if(e.getButton() == MouseEvent.BUTTON1){
-        //     System.out.println("Left Click!!!");
-        // }
-        // else if(e.getButton() == MouseEvent.BUTTON3) {
-        //     System.out.println("Right Click!!!");
-        // }
     }
 
     @Override

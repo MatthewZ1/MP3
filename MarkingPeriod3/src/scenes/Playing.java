@@ -7,16 +7,24 @@ import Main.Game;
 import Main.GamePanel;
 import helperMethod.LevelBuilder;
 import managers.TileManager;
+import ui.BottomBar;
 
 public class Playing extends GamePanel implements SceneMethods{
     private int[][] lvl;
     private TileManager tileManager;
+    private BottomBar bottomBar;
+
     public Playing(Game game) {
         super(game);
         //TODO Auto-generated constructor stub
 
         lvl = LevelBuilder.getLevelData();
         tileManager = new TileManager();
+        bottomBar = new BottomBar(0, 640, 640, 100, this);
+    }
+
+    public TileManager getTileManager(){
+        return tileManager;
     }
 
     @Override
@@ -29,30 +37,33 @@ public class Playing extends GamePanel implements SceneMethods{
                 g.drawImage(tileManager.getSprite(id), x*32, y*32, null);
             }
         }
+        bottomBar.draw(g);
     }
 
     @Override
     public void mouseClicked(int x, int y) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
+        if(y >= 640){
+            bottomBar.mouseMoved(x, y);
+        }
     }
 
     @Override
     public void mouseMoved(int x, int y) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
+        if(y >= 640){
+            bottomBar.mouseMoved(x, y);
+        }
     }
 
     @Override
     public void mousePressed(int x, int y) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+        if(y >= 640){
+            bottomBar.mouseMoved(x, y);
+        }
     }
 
     @Override
     public void mouseReleased(int x, int y) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseRelased'");
+        bottomBar.mouseMoved(x, y);
     }
 
     public void mouseDragged(int x, int y) {

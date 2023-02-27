@@ -6,21 +6,36 @@ import java.awt.Graphics;
 import java.awt.*;
 
 public class MyButton {
-    private int x, y, width, height;
+    public int x, y, width, height, id;
     private String txt;
     private boolean mouseOver, mousePressed;
 
     private Rectangle bounds;
 
+    //for normal buttons
     public MyButton(String txt, int x, int y, int width, int height){
         this.txt = txt;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.id = -1;
 
         initBounds();
     }
+
+    //for tile buttons 
+    public MyButton(String txt, int x, int y, int width, int height, int id){
+        this.txt = txt;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.id = id;
+
+        initBounds();
+    }
+
     public void setMousePressed(boolean mousePressed){
         this.mousePressed = mousePressed;
     }
@@ -72,5 +87,9 @@ public class MyButton {
     public void resetBooleans(){
         this.mouseOver = false;
         this.mousePressed = false;
+    }
+
+    public int getId(){
+        return id;
     }
 }
