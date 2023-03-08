@@ -7,7 +7,7 @@ import javax.swing.text.AttributeSet.ColorAttribute;
 import Main.Game;
 import Main.GamePanel;
 
-public class Settings extends GamePanel implements SceneMethods{
+public class Settings extends Scene implements SceneMethods{
     public Settings(Game game) {
         super(game);
         //TODO Auto-generated constructor stub

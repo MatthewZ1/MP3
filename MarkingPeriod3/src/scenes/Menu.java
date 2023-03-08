@@ -12,18 +12,11 @@ import Main.GamePanel;
 import ui.MyButton;
 import static Main.GameStates.*;
 
-public class Menu extends GamePanel implements SceneMethods{
-    private GamePanel gp;
-    private Game game;
-    private BufferedImage img;
-    private ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
-
+public class Menu extends Scene implements SceneMethods{
     private MyButton bPlaying, bEdit, bSettings, bQuit;
 
     public Menu(Game game){
         super(game);
-        importImg();
-        laodSprites();
         initButtons();
     }
 
@@ -57,22 +50,6 @@ public class Menu extends GamePanel implements SceneMethods{
         bEdit.draw(g);
         bSettings.draw(g);
         bQuit.draw(g);
-    }
-    private void laodSprites() {
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 10; x++) {
-                sprites.add(img.getSubimage(x * 32, y * 32, 32, 32));
-            }
-        }
-    }
-
-    private void importImg() {
-        File is = new File("./src/res/sprite.png");
-        try {
-            img = ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

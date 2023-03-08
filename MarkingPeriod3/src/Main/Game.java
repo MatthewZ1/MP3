@@ -8,8 +8,10 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import helperMethod.LoadSave;
 import inputs.WorkKeyListener;
 import inputs.WorkMouseListener;
+import managers.TileManager;
 import scenes.Settings;
 import scenes.Menu;
 import scenes.Playing;
@@ -27,6 +29,8 @@ public class Game extends JFrame implements Runnable {
 
 	private Render render;
 
+	private TileManager tileManager;
+
 	// classes
 	private Menu menu;
 	private Playing playing;
@@ -37,20 +41,9 @@ public class Game extends JFrame implements Runnable {
 	private int screenW = tileSize * 20;
 	private int screenH = tileSize * 20;
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.start();
-		game.gp.initInputs();
-	}
-
-	private void start() {
-		gameThread = new Thread(this) {
-		};
-		gameThread.start();
-	}
-
 	public Game() {
 		initClasses();
+		createDefaultLevel();
 		// creates a screen 20 tiles long and wide
 		// each tile being 32 pixels long anf wide
 		setSize(640, 640);
@@ -66,7 +59,16 @@ public class Game extends JFrame implements Runnable {
 
 	}
 
+	private void createDefaultLevel() {
+        int[] arr = new int[400];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = 0;
+        }
+        LoadSave.CreateLevel("new level", arr);
+    }
+
 	private void initClasses() {
+		tileManager = new TileManager();
 		render = new Render(this);
 		gp = new GamePanel(this);
 
@@ -74,6 +76,17 @@ public class Game extends JFrame implements Runnable {
 		playing = new Playing(this);
 		settings = new Settings(this);
 		editing = new Editing(this);
+	}
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.start();
+		game.gp.initInputs();
+	}
+
+	private void start() {
+		gameThread = new Thread(this) {
+		};
+		gameThread.start();
 	}
 
 	private void callUPS() {
@@ -139,6 +152,10 @@ public class Game extends JFrame implements Runnable {
 
 	public Editing getEditor() {
 		return editing;
+	}
+	
+	public TileManager getTileManager(){
+		return tileManager;
 	}
 
 }

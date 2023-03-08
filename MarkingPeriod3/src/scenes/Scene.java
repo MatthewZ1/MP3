@@ -9,7 +9,6 @@ public class Scene {
     public Scene(Game game){
 
     }
-
     public Game getGame(){
         return game;
     }

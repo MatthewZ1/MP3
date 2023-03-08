@@ -8,7 +8,7 @@ import java.awt.*;
 public class MyButton {
     public int x, y, width, height, id;
     private String txt;
-    private boolean mouseOver, mousePressed;
+    private boolean mouseOver, mousePressed, mouseClicked;
 
     private Rectangle bounds;
 
@@ -34,10 +34,6 @@ public class MyButton {
         this.id = id;
 
         initBounds();
-    }
-
-    public void setMousePressed(boolean mousePressed){
-        this.mousePressed = mousePressed;
     }
 
     private void initBounds(){
@@ -81,12 +77,28 @@ public class MyButton {
     public void setMouseOver(boolean mouseOver){
         this.mouseOver = mouseOver;
     }
+    public void setMouseClicked(boolean mouseClicked){
+        this.mouseClicked = mouseClicked;
+    }
+    public void setMousePressed(boolean mousePressed){
+        this.mousePressed = mousePressed;
+    }
     public Rectangle getBounds(){
         return bounds;
     }
     public void resetBooleans(){
         this.mouseOver = false;
         this.mousePressed = false;
+        this.mouseClicked = false;
+    }
+    public boolean isMouseOver(){
+        return mouseOver;
+    }
+    public boolean isMouseClicked(){
+        return mouseClicked;
+    }
+    public boolean isMousePressed(){
+        return mousePressed;
     }
 
     public int getId(){
