@@ -13,6 +13,7 @@ import inputs.WorkKeyListener;
 import inputs.WorkMouseListener;
 import managers.TileManager;
 import scenes.Settings;
+import ui.ToolBar;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Editing;

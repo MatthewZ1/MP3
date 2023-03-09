@@ -21,7 +21,9 @@ public class Editing extends Scene implements SceneMethods{
 
     public Editing(Game game) {
         super(game);
+        System.out.println(game);
         toolBar = new ToolBar(0, 640, 640, 100, this);
+        
     }
 
     @Override
@@ -103,5 +105,7 @@ public class Editing extends Scene implements SceneMethods{
             changeTile(x, y);
         }
     }
+    
+
     
 }

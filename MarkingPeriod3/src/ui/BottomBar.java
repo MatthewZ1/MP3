@@ -36,7 +36,7 @@ public class BottomBar {
         int xOffSet = (int) (w * 1.1);
 
         int i = 0;
-        for (Tile tile : playing.getTileManager().tiles) {
+        for (Tile tile : playing.getGame().getTileManager().tiles) {
             tileButtons.add(new MyButton(tile.getName(), xStart + xOffSet * i, yStart, w, h, i));
             i++;
         }
@@ -55,7 +55,7 @@ public class BottomBar {
     }
 
     private BufferedImage getButtonImg(int id) {
-        return playing.getTileManager().getSprite(id);
+        return playing.getGame().getTileManager().getSprite(id);
     }
 
     public void draw(Graphics g) {

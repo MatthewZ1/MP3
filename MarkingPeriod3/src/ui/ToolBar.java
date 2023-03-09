@@ -2,6 +2,7 @@ package ui;
 
 import java.util.ArrayList;
 
+import Main.Game;
 import objects.Tile;
 import scenes.Editing;
 import java.awt.*;
@@ -35,6 +36,7 @@ public class ToolBar extends Bar{
         int xOffSet = (int) (w * 1.1);
 
         int i = 0;
+        
         for (Tile tile : editing.getGame().getTileManager().tiles) {
             tileButtons.add(new MyButton(tile.getName(), xStart + xOffSet * i, yStart, w, h, i));
             i++;
