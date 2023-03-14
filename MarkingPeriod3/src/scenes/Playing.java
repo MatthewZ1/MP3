@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Main.Game;
+import helperMethod.LevelBuilder;
 import helperMethod.LoadSave;
 import ui.ActionBar;
 import java.awt.image.BufferedImage;
@@ -23,23 +24,30 @@ public class Playing extends Scene implements SceneMethods {
 
     private void loadDefaultLevel() {
         lvl = LoadSave.getLevelData("new level");
+        //lvl = LevelBuilder.getLevelData();
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(0, 0, 640, 640);
+        drawLevel(g);
+        actionBar.draw(g);
+    }
+
+    public void drawLevel(Graphics g){
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
                 g.drawImage(getSprite(id), x * 32, y * 32, null);
             }
         }
-        actionBar.draw(g);
     }
 
     private BufferedImage getSprite(int spriteID) {
         return getGame().getTileManager().getSprite(spriteID);
+    }
+
+    public void setLevel(int[][] lvl){
+        this.lvl = lvl;
     }
 
     @Override
