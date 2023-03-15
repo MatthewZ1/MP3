@@ -110,12 +110,14 @@ public class Editing extends Scene implements SceneMethods{
 
     @Override
     public void mousePressed(int x, int y) {
-        
+        if(y>= 640){
+            toolBar.mousePressed(x,y);
+        }
     }
 
     @Override
     public void mouseReleased(int x, int y) {
-
+        toolBar.mouseReleased(x,y);
     }
 
     public void mouseDragged(int x, int y) {
