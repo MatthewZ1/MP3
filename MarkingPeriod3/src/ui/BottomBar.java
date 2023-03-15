@@ -37,7 +37,7 @@ public class BottomBar {
 
         int i = 0;
         for (Tile tile : playing.getGame().getTileManager().tiles) {
-            tileButtons.add(new MyButton(tile.getName(), xStart + xOffSet * i, yStart, w, h, i));
+            tileButtons.add(new MyButton(tile.getTileType(), xStart + xOffSet * i, yStart, w, h, i));
             i++;
         }
     }
