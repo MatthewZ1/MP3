@@ -44,12 +44,11 @@ public class ToolBar extends Bar{
 		bWater = new MyButton("Water", xStart + xOffset, yStart, w, h, i++);
 
 		initMapButton(bRoadS, editing.getGame().getTileManager().getRoadsS(), xStart, yStart, xOffset, w, h, i++);
-		System.out.println(1);
         initMapButton(bRoadC, editing.getGame().getTileManager().getRoadsC(), xStart, yStart, xOffset, w, h, i++);
 		initMapButton(bWaterC, editing.getGame().getTileManager().getCorners(), xStart, yStart, xOffset, w, h, i++);
 		initMapButton(bWaterB, editing.getGame().getTileManager().getBeaches(), xStart, yStart, xOffset, w, h, i++);
 		initMapButton(bWaterI, editing.getGame().getTileManager().getIslands(), xStart, yStart, xOffset, w, h, i++);
-        System.out.println(1);
+
     }
 
     private void initMapButton(MyButton b, ArrayList<Tile> list, int x, int y, int xOff, int w, int h, int id){
@@ -83,11 +82,11 @@ public class ToolBar extends Bar{
     }
 
     private void drawMapButtons(Graphics g) {
-        for(Map.Entry<MyButton, ArrayList<Tile>> entry : map.entrySet()){
+        for(Map.Entry<MyButton, ArrayList<Tile>> entry: map.entrySet()){
             MyButton b = entry.getKey();
             BufferedImage img = entry.getValue().get(0).getSprite();
 
-            g.drawImage(img, x, y, b.width, b.height, null);
+            g.drawImage(img,  b.x, b.y, b.width, b.height, null);
         }
     }
 
