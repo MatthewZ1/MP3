@@ -96,6 +96,10 @@ public class TileManager {
 
 	}
 
+	public boolean isSpriteAnimation(int spriteID){
+		return tiles.get(spriteID).isAnimation();
+	}
+
     public ArrayList<Tile> getRoadsS() {
 		return roadsS;
 	}

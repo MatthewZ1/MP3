@@ -21,7 +21,8 @@ public class ToolBar extends Bar{
 
 	private Map<MyButton, ArrayList<Tile>> map = new HashMap<MyButton, ArrayList<Tile>>();
 	private MyButton bGrass, bWater, bRoadS, bRoadC, bWaterC, bWaterB, bWaterI;
-    // private ArrayList<MyButton> tileButtons = new ArrayList<MyButton>();
+    private MyButton currentButton;
+    private int currentIndex = 0;
 
     public ToolBar(int x, int y, int width, int height, Editing editing) {
         super(x, y, width, height);
@@ -122,6 +123,15 @@ public class ToolBar extends Bar{
         }
     }
 
+    public void rotateSprite(){
+        currentIndex++;
+        if(currentIndex >= map.get(currentButton).size()){
+            currentIndex = 0;
+        }
+        selectedTile = map.get(currentButton).get(currentIndex);
+        editing.setSelectedTile(selectedTile);
+    }
+
     private BufferedImage getButtonImg(int id) {
         return editing.getGame().getTileManager().getSprite(id);
     }
@@ -149,6 +159,8 @@ public class ToolBar extends Bar{
                 if (b.getBounds().contains(x, y)) {
                         selectedTile = map.get(b).get(0);
                         editing.setSelectedTile(selectedTile);
+                        currentButton = b;
+                        currentIndex = 0;
                         return;
                     }
             }
@@ -220,4 +232,5 @@ public class ToolBar extends Bar{
                 }
         }
     }
+
 }

@@ -31,6 +31,10 @@ public class Tile {
         return id;
     }
 
+    public boolean isAnimation(){
+        return sprite.length > 1;
+    }
+
     public String getTileType(){
         return tileType;
     }

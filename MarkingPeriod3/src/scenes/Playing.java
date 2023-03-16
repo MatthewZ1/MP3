@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import Main.Game;
 import helperMethod.LevelBuilder;
 import helperMethod.LoadSave;
+import managers.EnemyManager;
 import ui.ActionBar;
 import java.awt.image.BufferedImage;
 
@@ -13,6 +14,7 @@ public class Playing extends Scene implements SceneMethods {
     private int[][] lvl;
     private ActionBar actionBar;
     private int mouseX, mouseY;
+    private EnemyManager enemyManager;
 
     public Playing(Game game) {
         super(game);
@@ -20,6 +22,7 @@ public class Playing extends Scene implements SceneMethods {
         loadDefaultLevel();
         actionBar = new ActionBar(0, 640, 640, 100, this);
 
+        enemyManager = new EnemyManager(this);
     }
 
     private void loadDefaultLevel() {
@@ -31,6 +34,7 @@ public class Playing extends Scene implements SceneMethods {
     public void render(Graphics g) {
         drawLevel(g);
         actionBar.draw(g);
+        enemyManager.draw(g);
     }
 
     public void drawLevel(Graphics g){
@@ -40,6 +44,10 @@ public class Playing extends Scene implements SceneMethods {
                 g.drawImage(getSprite(id), x * 32, y * 32, null);
             }
         }
+    }
+
+    public void update(){
+        enemyManager.update();
     }
 
     private BufferedImage getSprite(int spriteID) {

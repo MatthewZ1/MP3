@@ -2,6 +2,8 @@ package scenes;
 
 import java.awt.Graphics;
 import java.awt.Color;
+
+import javax.swing.event.AncestorEvent;
 import javax.swing.text.AttributeSet.ColorAttribute;
 import java.awt.image.BufferedImage;
 import Main.Game;
@@ -10,6 +12,7 @@ import helperMethod.LoadSave;
 import managers.TileManager;
 import objects.Tile;
 import ui.ToolBar;
+import java.awt.event.KeyEvent;
 
 public class Editing extends Scene implements SceneMethods{
     private int[][] lvl;
@@ -18,6 +21,9 @@ public class Editing extends Scene implements SceneMethods{
     private boolean drawSelect;
     private int lastTileX, lastTileY, lastTileId;
     private ToolBar toolBar;
+    private int animationIndex;
+    private int tick;
+    private int ANIMATION_SPEED = 25;
 
     public Editing(Game game) {
         super(game);
@@ -31,13 +37,26 @@ public class Editing extends Scene implements SceneMethods{
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(getSprite(id), x * 32, y * 32, null);
+                if(isAnimation(id)){
+                    g.drawImage(getSprite(id, animationIndex), x * 32, y * 32, null);
+                }
+                else{
+                    g.drawImage(getSprite(id), x * 32, y * 32, null);
+                }
             }
         }
     }
 
+    private boolean isAnimation(int spriteID){
+        return getGame().getTileManager().isSpriteAnimation(spriteID);
+    }
+
     private BufferedImage getSprite(int spriteID) {
         return getGame().getTileManager().getSprite(spriteID);
+    }
+
+    private BufferedImage getSprite(int spriteID, int animationIndex) {
+        return getGame().getTileManager().getAniSprite(spriteID, animationIndex);
     }
 
     private void loadDefaultLevel() {
@@ -47,10 +66,22 @@ public class Editing extends Scene implements SceneMethods{
 
     @Override
     public void render(Graphics g) {
+        updateTick();
         drawLevel(g);
         toolBar.draw(g);
         drawSelectedTile(g);
 
+    }
+
+    private void updateTick() {
+        tick++;
+        if(tick >= ANIMATION_SPEED){
+            tick = 0;
+            animationIndex++;
+            if(animationIndex >= 4){
+                animationIndex = 0;
+            }
+        }
     }
 
     public void saveLevel(){
@@ -129,6 +160,10 @@ public class Editing extends Scene implements SceneMethods{
         }
     }
     
-
+    public void keyPressed(KeyEvent e){
+        if(e.getKeyCode() == KeyEvent.VK_R){
+            toolBar.rotateSprite();
+        }
+    }
     
 }

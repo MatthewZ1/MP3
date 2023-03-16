@@ -31,7 +31,7 @@ public class GamePanel extends JPanel {
     }
     public void initInputs(){
 		mouseListener = new WorkMouseListener(game);
-		keyListener = new WorkKeyListener();
+		keyListener = new WorkKeyListener(game);
 
 		addMouseListener(mouseListener);
 		addMouseMotionListener(mouseListener);
