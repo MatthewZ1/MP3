@@ -101,6 +101,7 @@ public class Game extends JFrame implements Runnable {
 	private void updateGame(){
 		switch(GameStates.gameState){
 			case EDIT:
+				editing.update();
 				break;
 			case MENU:
 				break;
@@ -135,7 +136,7 @@ public class Game extends JFrame implements Runnable {
 			}
 
 			if (System.nanoTime() - lastUpdate >= timePerUpdate) {
-				// updateGame();
+				updateGame();
 				lastUpdate = System.nanoTime();
 				updates++;
 			}

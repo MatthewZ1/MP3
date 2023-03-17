@@ -21,15 +21,12 @@ public class Editing extends Scene implements SceneMethods{
     private boolean drawSelect;
     private int lastTileX, lastTileY, lastTileId;
     private ToolBar toolBar;
-    private int animationIndex;
-    private int tick;
-    private int ANIMATION_SPEED = 25;
 
     public Editing(Game game) {
         super(game);
         System.out.println(game);
         loadDefaultLevel();
-        toolBar = new ToolBar(0, 640, 640, 100, this);
+        toolBar = new ToolBar(0, 640, 640, 160, this);
         
     }
 
@@ -38,7 +35,7 @@ public class Editing extends Scene implements SceneMethods{
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
                 if(isAnimation(id)){
-                    g.drawImage(getSprite(id, animationIndex), x * 32, y * 32, null);
+                    g.drawImage(getSprite(id, getAnimationIndex()), x * 32, y * 32, null);
                 }
                 else{
                     g.drawImage(getSprite(id), x * 32, y * 32, null);
@@ -47,41 +44,20 @@ public class Editing extends Scene implements SceneMethods{
         }
     }
 
-    private boolean isAnimation(int spriteID){
-        return getGame().getTileManager().isSpriteAnimation(spriteID);
-    }
-
-    private BufferedImage getSprite(int spriteID) {
-        return getGame().getTileManager().getSprite(spriteID);
-    }
-
-    private BufferedImage getSprite(int spriteID, int animationIndex) {
-        return getGame().getTileManager().getAniSprite(spriteID, animationIndex);
-    }
-
     private void loadDefaultLevel() {
         lvl = LoadSave.getLevelData("new level");
         //lvl = LevelBuilder.getLevelData();
     }
 
+    public void update(){
+        updateTick();
+    }
+
     @Override
     public void render(Graphics g) {
-        updateTick();
         drawLevel(g);
         toolBar.draw(g);
         drawSelectedTile(g);
-
-    }
-
-    private void updateTick() {
-        tick++;
-        if(tick >= ANIMATION_SPEED){
-            tick = 0;
-            animationIndex++;
-            if(animationIndex >= 4){
-                animationIndex = 0;
-            }
-        }
     }
 
     public void saveLevel(){

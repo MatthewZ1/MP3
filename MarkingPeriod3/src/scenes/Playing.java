@@ -32,6 +32,7 @@ public class Playing extends Scene implements SceneMethods {
 
     @Override
     public void render(Graphics g) {
+        updateTick();
         drawLevel(g);
         actionBar.draw(g);
         enemyManager.draw(g);
@@ -41,17 +42,32 @@ public class Playing extends Scene implements SceneMethods {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(getSprite(id), x * 32, y * 32, null);
+                if(isAnimation(id)){
+                    g.drawImage(getSprite(id, getAnimationIndex()), x * 32, y * 32, null);
+                }
+                else{
+                    g.drawImage(getSprite(id), x * 32, y * 32, null);
+                }           
             }
         }
     }
 
-    public void update(){
-        enemyManager.update();
+    public int getTileType(int x, int y){
+        int xCord = x/32;
+        int yCord = y/32;
+        if(xCord < 0 || xCord > 19){
+            return 0;
+        }
+        if(yCord < 0 || yCord > 19){
+            return 0;
+        }
+        int id = lvl[y/32][x/32];
+        return getGame().getTileManager().getTile(id).getTileType();
     }
 
-    private BufferedImage getSprite(int spriteID) {
-        return getGame().getTileManager().getSprite(spriteID);
+    public void update(){
+        updateTick();
+        enemyManager.update();
     }
 
     public void setLevel(int[][] lvl){
@@ -63,6 +79,9 @@ public class Playing extends Scene implements SceneMethods {
         if (y >= 640) {
             actionBar.mouseClicked(x, y);
         }
+        // else{
+        //     enemyManager.addEnemy(x, y);
+        // }
     }
 
     @Override
